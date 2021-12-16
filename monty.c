@@ -11,7 +11,7 @@ int main(int ac, char **av)
 	FILE *file;
 	char *buf;
 	char **argv;
-	stack_t *head;
+	stack_t *head = NULL;
 	void (*funct)(stack_t **stack, unsigned int line_number);
 
 	if (ac != 2)
