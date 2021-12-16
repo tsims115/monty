@@ -11,33 +11,27 @@ int main(int ac, char **av)
 	FILE *file;
 	char *buf;
 	char **argv;
+<<<<<<< HEAD
 	stack_t *head = NULL;
 	void (*funct)(stack_t **stack, unsigned int line_number);
+=======
+	stack_t *head = NULL;
+	void (*funct)(stack_t **stack, unsigned int line_number);
+>>>>>>> 3c171573dfd4e62de69cb9951b1172df4a85b837
 
 	if (ac != 2)
-	{
-		fprintf(stderr, "USAGE: monty file\n");
-		exit(EXIT_FAILURE);
-	}
+		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
 	buf = malloc(sizeof(char) * 1000);
 	if (buf == NULL)
-	{
-		free(buf);
-		perror("Error: malloc failed\n");
-		exit(EXIT_FAILURE);
-	}
+		free(buf), perror("Error: malloc failed\n"), exit(EXIT_FAILURE);
 	file = fopen(av[1], "r");
 	if (file == NULL)
-	{
-		fprintf(stderr, "Error: Can't open file %s\n", av[1]);
-		exit(EXIT_FAILURE);
-	}
+		fprintf(stderr, "Error: Can't open file %s\n", av[1]), exit(EXIT_FAILURE);
 	while (fgets(buf, sizeof(buf), file) != NULL)
 	{
 		if (buf[strlen(buf) - 1] == '\n')
 			buf[strlen(buf) - 1] = '\0';
-		argv = splitter(buf);
-		funct = get_function(argv[0]);
+		argv = splitter(buf), funct = get_function(argv[0]);
 		if (funct)
 		{
 			if (argv[1] == NULL)
@@ -47,8 +41,7 @@ int main(int ac, char **av)
 		}
 		else
 		{
-			fprintf(stderr, "L: unknown instruction %s",  argv[0]);
-			free(buf);
+			fprintf(stderr, "L: unknown instruction %s",  argv[0]), free(buf);
 			exit(EXIT_FAILURE);
 		}
 		free(argv);
@@ -57,11 +50,18 @@ int main(int ac, char **av)
 	return (0);
 }
 
-void(*get_function(char *s))(stack_t **stack, unsigned int line_number)
+/**
+ * get_function - returns a function specified by instruction_t
+ *
+ * @s: The first argument passed as a string to perform
+ * Return: A function pointer to the function to perform
+ */
+void(*get_function(char *s))(stackk_t **stack, unsigned int line_number)
 {
 	instruction_t functs[] = {
 		{"push", push},
-		{"pall", pAll}
+		{"pall", pAll},
+		{"pint", pInt}
 	};
 	int i = 0;
 
