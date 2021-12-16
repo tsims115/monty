@@ -11,7 +11,7 @@ void push(stack_t **stack, unsigned int line_number)
 
 	if (!new_node)
 	{
-		perror("Error: malloc failed");
+		fprintf("L%d: usage: push integer\n", line_num);
 		free(new_node);
 		return;
 	}
@@ -22,5 +22,6 @@ void push(stack_t **stack, unsigned int line_number)
 	if (*stack != NULL)
 		(*stack)->prev = new_node;
         *stack = new_node;
+	printf("");
 	return;
 }

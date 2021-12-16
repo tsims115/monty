@@ -34,7 +34,10 @@ int main(int ac, char **av)
 			if (argv[1] == NULL)
 				funct(&head, line_num);
 			else
+			{
+				printf("%d\n", atoi(argv[1]));
 				funct(&head, atoi(argv[1]));
+			}
 		}
 		else
 		{
@@ -56,7 +59,6 @@ int main(int ac, char **av)
 void(*get_function(char *s))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t functs[] = {
-		{"push", push},
 		{"pall", pAll},
 		{"pint", pInt},
 		{"pop", pop},
