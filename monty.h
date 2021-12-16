@@ -6,10 +6,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <sys/types.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
 #include <unistd.h>
-#include <stdarg.h>
 #include <limits.h>
 
 /**
@@ -64,5 +61,8 @@ typedef struct path_list
 } path_list;
 
 char **splitter(char fun[]);
+void (*get_function(char *s))(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pAll(stack_t **stack, unsigned int line_number);
 
 #endif

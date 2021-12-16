@@ -1,4 +1,4 @@
-a#include "monty.h"
+#include "monty.h"
 /**
  * main - interpret monty bytecodes from files
  * @ac: number of arguments
@@ -12,13 +12,11 @@ int main(int ac, char **av)
 	char *buf;
 	char **argv;
 	stack_t *head;
-	int (*funct)(va_list *);
-	ssize_t n = 0;
-	int i = 0;
+	void (*funct)(stack_t **stack, unsigned int line_number);
 
 	if (ac != 2)
 	{
-		perror("USAGE: monty file\n");
+		fprintf(stderr, "USAGE: monty file\n");
 		exit(EXIT_FAILURE);
 	}
 	buf = malloc(sizeof(char) * 1000);
@@ -39,16 +37,19 @@ int main(int ac, char **av)
 		if (buf[strlen(buf) - 1] == '\n')
 			buf[strlen(buf) - 1] = '\0';
 		argv = splitter(buf);
-		for (i = 0; argv[i] != NULL; i++)
+		funct = get_function(argv[0]);
+		if (funct)
 		{
-			printf("%s\n", argv[i]);
-			funct = get_function(argv[0]);
-			if (funct)
-				n += funct(*head, argv[1]);
+			if (argv[1] == NULL)
+				funct(&head, 0);
 			else
-				fprintf(stderr, "L%d: unknown instruction %s", n++, argv[0]);
-				free(buf);
-				exit(EXIT_FAILURE);
+				funct(&head, atoi(argv[1]));
+		}
+		else
+		{
+			fprintf(stderr, "L: unknown instruction %s",  argv[0]);
+			free(buf);
+			exit(EXIT_FAILURE);
 		}
 		free(argv);
 	}
@@ -56,19 +57,14 @@ int main(int ac, char **av)
 	return (0);
 }
 
-int (*get_function(char *s))(va_list * args)
+void(*get_function(char *s))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t functs[] = {
 		{"push", push},
-		{"pall", pAll},
-		{"pint", pInt},
-		{"pop", pop},
-		{"add", add},
-		{"swap", swap},
-		{"nop", nop}
+		{"pall", pAll}
 	};
 	int i = 0;
-	
+
 	while (functs[i].opcode != NULL)
 	{
 		if (strcmp(s, functs[i].opcode) == 0)
@@ -77,5 +73,5 @@ int (*get_function(char *s))(va_list * args)
 		}
 		i++;
 	}
-return (NULL);
+	return (NULL);
 }
