@@ -39,31 +39,16 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/**
- * struct function - structure to find the correct function for a specifier
- * @spec: The specifier in question
- * @funct: The function associated with the specifier
- */
-typedef struct function
-{
-	char *spec;
-	int (*funct)(va_list *);
-} function_t;
-/**
- * struct path_list - structure build a linked list of PATH directories
- * @path: char * of path directory
- * @next: next node in linked list
- */
-typedef struct path_list
-{
-	char *path;
-	struct path_list *next;
-} path_list;
+int line_num;
 
 char **splitter(char fun[]);
 void (*get_function(char *s))(stack_t **stack, unsigned int line_number);
 void push(stack_t **stack, unsigned int line_number);
 void pAll(stack_t **stack, unsigned int line_number);
 void pInt(stack_t **stack, unsigned int line_number);
+void pop(stack_t **stack, unsigned int line_number);
+void swap(stack_t **stack, unsigned int line_number);
+void add(stack_t **stack, unsigned int line_number);
+void nop(stack_t **stack, unsigned int line_number);
 
 #endif

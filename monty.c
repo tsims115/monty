@@ -14,6 +14,7 @@ int main(int ac, char **av)
 	stack_t *head = NULL;
 	void (*funct)(stack_t **stack, unsigned int line_number);
 
+	line_num = 0;
 	if (ac != 2)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
 	buf = malloc(sizeof(char) * 1000);
@@ -24,13 +25,14 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]), exit(EXIT_FAILURE);
 	while (fgets(buf, sizeof(buf), file) != NULL)
 	{
+		line_num++;
 		if (buf[strlen(buf) - 1] == '\n')
 			buf[strlen(buf) - 1] = '\0';
 		argv = splitter(buf), funct = get_function(argv[0]);
 		if (funct)
 		{
 			if (argv[1] == NULL)
-				funct(&head, 0);
+				funct(&head, line_num);
 			else
 				funct(&head, atoi(argv[1]));
 		}
@@ -56,7 +58,12 @@ void(*get_function(char *s))(stack_t **stack, unsigned int line_number)
 	instruction_t functs[] = {
 		{"push", push},
 		{"pall", pAll},
-		{"pint", pInt}
+		{"pint", pInt},
+		{"pop", pop},
+		{"swap", swap},
+		{"add", add},
+		{"nop", nop},
+		{NULL, NULL}
 	};
 	int i = 0;
 
