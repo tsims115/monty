@@ -11,13 +11,8 @@ int main(int ac, char **av)
 	FILE *file;
 	char *buf;
 	char **argv;
-<<<<<<< HEAD
 	stack_t *head = NULL;
 	void (*funct)(stack_t **stack, unsigned int line_number);
-=======
-	stack_t *head = NULL;
-	void (*funct)(stack_t **stack, unsigned int line_number);
->>>>>>> 3c171573dfd4e62de69cb9951b1172df4a85b837
 
 	if (ac != 2)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
@@ -56,7 +51,7 @@ int main(int ac, char **av)
  * @s: The first argument passed as a string to perform
  * Return: A function pointer to the function to perform
  */
-void(*get_function(char *s))(stackk_t **stack, unsigned int line_number)
+void(*get_function(char *s))(stack_t **stack, unsigned int line_number)
 {
 	instruction_t functs[] = {
 		{"push", push},

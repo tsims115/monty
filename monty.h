@@ -23,7 +23,7 @@ typedef struct stack_s
         int n;
         struct stack_s *prev;
         struct stack_s *next;
-} stackk_t;
+} stack_t;
 
 /**
  * struct instruction_s - opcode and its function
@@ -36,7 +36,7 @@ typedef struct stack_s
 typedef struct instruction_s
 {
         char *opcode;
-        void (*f)(stackk_t **stack, unsigned int line_number);
+        void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
 /**
@@ -61,9 +61,9 @@ typedef struct path_list
 } path_list;
 
 char **splitter(char fun[]);
-void (*get_function(char *s))(stackk_t **stack, unsigned int line_number);
-void push(stackk_t **stack, unsigned int line_number);
-void pAll(stackk_t **stack, unsigned int line_number);
-void pInt(stackk_t **stack, unsigned int line_number);
+void (*get_function(char *s))(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number);
+void pAll(stack_t **stack, unsigned int line_number);
+void pInt(stack_t **stack, unsigned int line_number);
 
 #endif

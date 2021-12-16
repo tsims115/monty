@@ -6,9 +6,9 @@
  * Return: void
  */
 
-void pInt(stackk_t **stack, unsigned int line_number)
+void pInt(stack_t **stack, unsigned int line_number)
 {
-	stackk_t *node = *stack;
+	stack_t *node = *stack;
 
 	if (!stack)
 	{
