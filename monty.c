@@ -43,7 +43,12 @@ int main(int ac, char **av)
 		{
 			printf("%s\n", argv[i]);
 			funct = get_function(argv[0]);
-			n += funct(*head, argv[1]);
+			if (funct)
+				n += funct(*head, argv[1]);
+			else
+				fprintf(stderr, "L%d: unknown instruction %s", n++, argv[0]);
+				free(buf);
+				exit(EXIT_FAILURE);
 		}
 		free(argv);
 	}
