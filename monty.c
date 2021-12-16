@@ -11,8 +11,8 @@ int main(int ac, char **av)
 	FILE *file;
 	char *buf;
 	char **argv;
-	stack_t *head;
-	void (*funct)(stack_t **stack, unsigned int line_number);
+	stackk_t *head;
+	void (*funct)(stackk_t **stack, unsigned int line_number);
 
 	if (ac != 2)
 	{
@@ -57,11 +57,12 @@ int main(int ac, char **av)
 	return (0);
 }
 
-void(*get_function(char *s))(stack_t **stack, unsigned int line_number)
+void(*get_function(char *s))(stackk_t **stack, unsigned int line_number)
 {
 	instruction_t functs[] = {
 		{"push", push},
-		{"pall", pAll}
+		{"pall", pAll},
+		{"pint", pInt}
 	};
 	int i = 0;
 

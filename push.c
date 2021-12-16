@@ -5,9 +5,9 @@
  * @line_number: number to put into new node
  */
 
-void push(stack_t **stack, unsigned int line_number)
+void push(stackk_t **stack, unsigned int line_number)
 {
-	stack_t *new_node = malloc(sizeof(stack_t));
+	stackk_t *new_node = malloc(sizeof(stack_t));
 
 	if (!new_node)
 	{
