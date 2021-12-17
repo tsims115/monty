@@ -32,11 +32,12 @@ int main(int ac, char **av)
 		line_number++;
 		if (tmp[strlen(tmp) - 1] == '\n')
 			tmp[strlen(tmp) - 1] = '\0';
-		argv = splitter(tmp), funct = get_function(argv[0]);
-		if (strcmp("push", argv[0]) == 0 && argv[1])
-			push(&head, line_number, argv[1]);
-		else if (funct)
+		argv = splitter(tmp);
+		funct = get_function(argv[0]);
+		if (funct)
 			funct(&head, line_number);
+		else if (strcmp("push", argv[0]) == 0 && argv[1])
+                        push(&head, line_number, argv[1]);
 		else
 		{
 			fprintf(stderr, "L: unknown instruction %s\n",  argv[0]), free(buf);
@@ -68,6 +69,8 @@ void(*get_function(char *s))(stack_t **stack, unsigned int line_number)
 	};
 	int i = 0;
 
+	if (s == NULL)
+		return (functs[5].f);
 	while (functs[i].opcode != NULL)
 	{
 		if (strcmp(s, functs[i].opcode) == 0)
