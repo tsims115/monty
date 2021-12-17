@@ -13,14 +13,15 @@ void push(stack_t **stack, unsigned int line_number, char *str)
 	if (strcmp("0", str) == 0)
 		n = 0;
 	else if (atoi(str) != 0)
+	{
 		n = atoi(str);
+	}
 	else
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(new_node);
 		return;
 	}
-
 	if (!new_node)
 	{
 		fprintf(stderr, "Error: malloc failed\n");

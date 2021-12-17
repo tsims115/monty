@@ -12,18 +12,21 @@ int main(int ac, char **av)
 	char *buf, *tmp;
 	char **argv;
 	stack_t *head = NULL;
+	ssize_t line_size;
+	size_t line_buf_size = 0;
 	int line_number = 0;
 	void (*funct)(stack_t **stack, unsigned int line_number);
 
 	if (ac != 2)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
-	buf = malloc(sizeof(char) * 1000);
+	buf = malloc(sizeof(char) * 10000);
 	if (buf == NULL)
 		free(buf), perror("Error: malloc failed\n"), exit(EXIT_FAILURE);
 	file = fopen(av[1], "r");
 	if (file == NULL)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]), exit(EXIT_FAILURE);
-	while (fgets(buf, sizeof(buf), file) != NULL)
+	line_size = getline(&buf, &line_buf_size, file);
+	while (line_size >= 0)
 	{
 		tmp = strdup(buf);
 		line_number++;
@@ -40,8 +43,8 @@ int main(int ac, char **av)
 			fprintf(stderr, "L: unknown instruction %s\n",  argv[0]), free(buf);
 			exit(EXIT_FAILURE);
 		}
-		free(tmp);
-		free(argv);
+		free(tmp), free(argv);
+		line_size = getline(&buf, &line_buf_size, file);
 	}
 	fclose(file);
 	return (0);
