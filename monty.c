@@ -32,7 +32,6 @@ int main(int ac, char **av)
 		line_number++;
 		if (tmp[strlen(tmp) - 1] == '\n')
 			tmp[strlen(tmp) - 1] = '\0';
-		printf("I am here: %d: %s\n", line_number, tmp);
 		argv = splitter(tmp), funct = get_function(argv[0]);
 		if (strcmp("push", argv[0]) == 0 && argv[1])
 			push(&head, line_number, argv[1]);
