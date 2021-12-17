@@ -40,7 +40,7 @@ typedef struct instruction_s
 
 char **splitter(char fun[]);
 void (*get_function(char *s))(stack_t **stack, unsigned int line_number);
-void push(stack_t **stack, unsigned int line_number, int n);
+void push(stack_t **stack, unsigned int line_number, char *str);
 void pAll(stack_t **stack, unsigned int line_number);
 void pInt(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);

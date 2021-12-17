@@ -9,12 +9,12 @@
 int main(int ac, char **av)
 {
 	FILE *file;
-	char *buf;
+	char *buf, *tmp;
 	char **argv;
 	stack_t *head = NULL;
+	int line_number = 0;
 	void (*funct)(stack_t **stack, unsigned int line_number);
 
-	line_num = 0;
 	if (ac != 2)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
 	buf = malloc(sizeof(char) * 1000);
@@ -25,19 +25,22 @@ int main(int ac, char **av)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]), exit(EXIT_FAILURE);
 	while (fgets(buf, sizeof(buf), file) != NULL)
 	{
-		line_num++;
-		if (buf[strlen(buf) - 1] == '\n')
-			buf[strlen(buf) - 1] = '\0';
-		argv = splitter(buf), funct = get_function(argv[0]);
-		if (strcpm("push"), argv[0] == 0 && argv[1])
-			push(&head, argv[1], line_number);
-		if (funct)
+		tmp = strdup(buf);
+		line_number++;
+		if (tmp[strlen(tmp) - 1] == '\n')
+			tmp[strlen(tmp) - 1] = '\0';
+		printf("I am here: %d: %s\n", line_number, tmp);
+		argv = splitter(tmp), funct = get_function(argv[0]);
+		if (strcmp("push", argv[0]) == 0 && argv[1])
+			push(&head, line_number, argv[1]);
+		else if (funct)
 			funct(&head, line_number);
 		else
 		{
-			fprintf(stderr, "L: unknown instruction %s",  argv[0]), free(buf);
+			fprintf(stderr, "L: unknown instruction %s\n",  argv[0]), free(buf);
 			exit(EXIT_FAILURE);
 		}
+		free(tmp);
 		free(argv);
 	}
 	fclose(file);
