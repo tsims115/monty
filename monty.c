@@ -29,16 +29,10 @@ int main(int ac, char **av)
 		if (buf[strlen(buf) - 1] == '\n')
 			buf[strlen(buf) - 1] = '\0';
 		argv = splitter(buf), funct = get_function(argv[0]);
+		if (strcpm("push"), argv[0] == 0 && argv[1])
+			push(&head, argv[1], line_number);
 		if (funct)
-		{
-			if (argv[1] == NULL)
-				funct(&head, line_num);
-			else
-			{
-				printf("%d\n", atoi(argv[1]));
-				funct(&head, atoi(argv[1]));
-			}
-		}
+			funct(&head, line_number);
 		else
 		{
 			fprintf(stderr, "L: unknown instruction %s",  argv[0]), free(buf);

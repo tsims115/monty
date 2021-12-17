@@ -5,7 +5,6 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include <sys/types.h>
 #include <unistd.h>
 #include <limits.h>
 
@@ -39,11 +38,9 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-int line_num;
-
 char **splitter(char fun[]);
 void (*get_function(char *s))(stack_t **stack, unsigned int line_number);
-void push(stack_t **stack, unsigned int line_number);
+void push(stack_t **stack, unsigned int line_number, int n);
 void pAll(stack_t **stack, unsigned int line_number);
 void pInt(stack_t **stack, unsigned int line_number);
 void pop(stack_t **stack, unsigned int line_number);
