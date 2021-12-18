@@ -10,16 +10,20 @@ void push(stack_t **stack, unsigned int line_number, char *str)
 {
 	stack_t *new_node = malloc(sizeof(stack_t));
 	int n;
-	int i, c = 0;
+	int i = 0, c = 0;
 
 	while (str[i])
 	{
 		if (!isdigit(str[i]))
 			c++;
-		i++;
+	        i++;
 	}
 	n = atoi(str);
-	if (c > 0 || !str)
+	if (strcmp(str, "-0") == 0)
+	{
+		n = 0;
+	}
+	else if (c > 0 || !str || n == 0)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(new_node);
