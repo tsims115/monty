@@ -37,7 +37,7 @@ int main(int ac, char **av)
 		else
 		{
 			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, argv[0]);
-			free(buf), free(argv),  exit(EXIT_FAILURE);
+			free(buf), free(argv), free_s(head),  exit(EXIT_FAILURE);
 		}
 		free(tmp), free(argv);
 		line_size = getline(&buf, &line_buf_size, file);
