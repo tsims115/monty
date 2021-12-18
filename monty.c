@@ -9,7 +9,8 @@
 int main(int ac, char **av)
 {
 	FILE *file;
-	char *buf, *tmp;
+	char *buf = NULL;
+	char *tmp;
 	char **argv;
 	stack_t *head = NULL;
 	ssize_t line_size;
@@ -19,21 +20,16 @@ int main(int ac, char **av)
 
 	if (ac != 2)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
-	buf = malloc(sizeof(char) * 10000);
-	if (buf == NULL)
-		free(buf), fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 	file = fopen(av[1], "r");
 	if (file == NULL)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]), exit(EXIT_FAILURE);
 	line_size = getline(&buf, &line_buf_size, file);
 	while (line_size >= 0)
 	{
-		tmp = strdup(buf);
 		line_number++;
-		if (tmp[strlen(tmp) - 1] == '\n')
-			tmp[strlen(tmp) - 1] = '\0';
-		argv = splitter(tmp);
-		funct = get_function(argv[0]);
+		if (buf[strlen(buf) - 1] == '\n')
+			buf[strlen(buf) - 1] = '\0';
+		tmp = strdup(buf), argv = splitter(tmp), funct = get_function(argv[0]);
 		if (funct)
 			funct(&head, line_number);
 		else if (strcmp("push", argv[0]) == 0 && argv[1])
@@ -46,8 +42,24 @@ int main(int ac, char **av)
 		free(tmp), free(argv);
 		line_size = getline(&buf, &line_buf_size, file);
 	}
-	fclose(file);
+	free(buf), free_s(head), fclose(file);
 	return (0);
+}
+
+/**
+ * free_s - frees the stack
+ * @stack: stack to free
+ */
+void free_s(stack_t *stack)
+{
+	stack_t *node = stack;
+
+	while (node)
+	{
+		stack = node->next;
+		free(node);
+		node = stack;
+	}
 }
 
 /**
