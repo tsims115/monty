@@ -36,8 +36,11 @@ int main(int ac, char **av)
 			push(&head, line_number, argv[1]);
 		else
 		{
-			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, argv[0]);
-			free(buf), free(argv), free_s(head),  exit(EXIT_FAILURE);
+			if (strcmp("push", argv[0]) == 0)
+				fprintf(stderr, "L%d: usage: push integer\n", line_number);
+			else
+				fprintf(stderr, "L%d: unknown instruction %s\n", line_number, argv[0]);
+			free(buf), free(argv), free_s(head), exit(EXIT_FAILURE);
 		}
 		free(tmp), free(argv);
 		line_size = getline(&buf, &line_buf_size, file);
