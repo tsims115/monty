@@ -10,7 +10,7 @@ void pInt(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
 
-	if (!stack)
+	if (!node)
 	{
 		fprintf(stderr, "L%d: can't pint, stack empty\n", line_number);
 		exit(EXIT_FAILURE);
