@@ -17,5 +17,4 @@ void pInt(stack_t **stack, unsigned int line_number)
 	}
 	else
 		printf("%d\n", node->n);
-	return;
 }

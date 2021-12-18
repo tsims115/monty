@@ -3,6 +3,7 @@
  * push - make a new node and add it to the beginning of the stack
  * @stack: stack to use
  * @line_number: number to put into new node
+ * @str: string to get int number from
  */
 
 void push(stack_t **stack, unsigned int line_number, char *str)
@@ -20,7 +21,7 @@ void push(stack_t **stack, unsigned int line_number, char *str)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(new_node);
-		return;
+		exit(EXIT_FAILURE);
 	}
 	if (!new_node)
 	{
@@ -35,5 +36,4 @@ void push(stack_t **stack, unsigned int line_number, char *str)
 	if (*stack != NULL)
 		(*stack)->prev = new_node;
 	*stack = new_node;
-	return;
 }

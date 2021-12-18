@@ -21,7 +21,7 @@ int main(int ac, char **av)
 		fprintf(stderr, "USAGE: monty file\n"), exit(EXIT_FAILURE);
 	buf = malloc(sizeof(char) * 10000);
 	if (buf == NULL)
-		free(buf), perror("Error: malloc failed\n"), exit(EXIT_FAILURE);
+		free(buf), fprintf(stderr, "Error: malloc failed\n"), exit(EXIT_FAILURE);
 	file = fopen(av[1], "r");
 	if (file == NULL)
 		fprintf(stderr, "Error: Can't open file %s\n", av[1]), exit(EXIT_FAILURE);
@@ -37,11 +37,11 @@ int main(int ac, char **av)
 		if (funct)
 			funct(&head, line_number);
 		else if (strcmp("push", argv[0]) == 0 && argv[1])
-                        push(&head, line_number, argv[1]);
+			push(&head, line_number, argv[1]);
 		else
 		{
-			fprintf(stderr, "L: unknown instruction %s\n",  argv[0]), free(buf);
-			exit(EXIT_FAILURE);
+			fprintf(stderr, "L%d: unknown instruction %s\n", line_number, argv[0]);
+			free(buf), free(argv),  exit(EXIT_FAILURE);
 		}
 		free(tmp), free(argv);
 		line_size = getline(&buf, &line_buf_size, file);

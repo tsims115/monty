@@ -8,7 +8,7 @@ void pAll(stack_t **stack, unsigned int line_number)
 {
 	stack_t *node = *stack;
 	int i = 0;
-	( void ) line_number;
+	(void) line_number;
 
 	while (node != NULL)
 	{
@@ -16,5 +16,4 @@ void pAll(stack_t **stack, unsigned int line_number)
 		node = node->next;
 		i++;
 	}
-	return;
 }

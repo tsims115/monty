@@ -1,8 +1,8 @@
 #include "monty.h"
 /**
- *
- *
- *
+ * add - add up the top two nodes and store it in the second
+ * @stack: stack to use
+ * @line_number: line number to use
  */
 void add(stack_t **stack, unsigned int line_number)
 {
