@@ -16,10 +16,10 @@ void push(stack_t **stack, unsigned int line_number, char *str)
 	{
 		if (!isdigit(str[i]))
 			c++;
-	        i++;
+		i++;
 	}
 	n = atoi(str);
-        if (c > 0 || !str)
+	if (c > 0 || !str)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
 		free(new_node);
