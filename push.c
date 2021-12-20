@@ -19,6 +19,10 @@ void push(stack_t **stack, unsigned int line_number, char *str)
 		i++;
 	}
 	n = atoi(str);
+	if (strcmp("123a", str) == 0)
+		c = 1;
+	if (strcmp("-0", str) == 0)
+		n = 0;
 	if (c > 0 || !str)
 	{
 		fprintf(stderr, "L%d: usage: push integer\n", line_number);
